@@ -3,10 +3,30 @@ let currentLang = localStorage.getItem('selectedLanguage') || 'en';
 
 async function loadTranslations() {
     try {
-        const response = await fetch('/js/translations.json');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        // Try different possible paths for the translations file
+        const possiblePaths = [
+            '/js/translations.json',
+            'js/translations.json',
+            '../js/translations.json',
+            './js/translations.json'
+        ];
+
+        let response = null;
+        for (const path of possiblePaths) {
+            try {
+                response = await fetch(path);
+                if (response.ok) {
+                    break;
+                }
+            } catch (e) {
+                continue;
+            }
         }
+
+        if (!response || !response.ok) {
+            throw new Error('Could not load translations file');
+        }
+
         const data = await response.json();
         translations = data;
         return translations;

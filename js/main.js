@@ -26,48 +26,58 @@ async function init() {
         camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.z = 7;
         
-        // Create renderer
+        // Create renderer with proper settings for GitHub Pages
         renderer = new THREE.WebGLRenderer({ 
             antialias: true,
-            alpha: true
+            alpha: true,
+            powerPreference: "high-performance"
         });
         renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.setClearColor(0x000000, 1);
         
         // Get container and check if it exists
         const container = document.getElementById('scene-container');
-        if (container) {
-            container.appendChild(renderer.domElement);
-            
-            // Add lights
-            const ambientLight = new THREE.AmbientLight(0x404040, 2);
-            scene.add(ambientLight);
-            
-            const directionalLight = new THREE.DirectionalLight(0x00ffff, 2);
-            directionalLight.position.set(5, 3, 5);
-            scene.add(directionalLight);
-
-            // Add point lights for better illumination
-            const pointLight1 = new THREE.PointLight(0x00ffff, 1.5);
-            pointLight1.position.set(5, 5, 5);
-            scene.add(pointLight1);
-
-            const pointLight2 = new THREE.PointLight(0x0088ff, 1.5);
-            pointLight2.position.set(-5, -5, -5);
-            scene.add(pointLight2);
-            
-            // Create planet and atmosphere
-            createPlanet();
-            createServiceMeteors();
-            createParticles();
-            
-            // Add event listeners
-            window.addEventListener('resize', onWindowResize);
-            document.addEventListener('mousemove', onMouseMove);
-            
-            // Start animation
-            animate();
+        if (!container) {
+            console.error('Scene container not found');
+            return;
         }
+
+        // Clear any existing content
+        container.innerHTML = '';
+        container.appendChild(renderer.domElement);
+        
+        // Add lights
+        const ambientLight = new THREE.AmbientLight(0x404040, 2);
+        scene.add(ambientLight);
+        
+        const directionalLight = new THREE.DirectionalLight(0x00ffff, 2);
+        directionalLight.position.set(5, 3, 5);
+        scene.add(directionalLight);
+
+        // Add point lights for better illumination
+        const pointLight1 = new THREE.PointLight(0x00ffff, 1.5);
+        pointLight1.position.set(5, 5, 5);
+        scene.add(pointLight1);
+
+        const pointLight2 = new THREE.PointLight(0x0088ff, 1.5);
+        pointLight2.position.set(-5, -5, -5);
+        scene.add(pointLight2);
+        
+        // Create planet and atmosphere
+        createPlanet();
+        createServiceMeteors();
+        createParticles();
+        
+        // Add event listeners
+        window.addEventListener('resize', onWindowResize);
+        document.addEventListener('mousemove', onMouseMove);
+        
+        // Start animation
+        animate();
+
+        // Force a resize event to ensure proper rendering
+        window.dispatchEvent(new Event('resize'));
     } catch (error) {
         console.error('Error initializing scene:', error);
     }
@@ -421,9 +431,12 @@ function animate() {
 
 // Handle window resize
 function onWindowResize() {
+    if (!camera || !renderer) return;
+    
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 }
 
 // Handle mouse movement
@@ -439,4 +452,11 @@ function onMouseMove(event) {
 }
 
 // Initialize everything when the page loads
-window.addEventListener('load', init); 
+window.addEventListener('load', () => {
+    // Ensure Three.js is loaded
+    if (typeof THREE === 'undefined') {
+        console.error('Three.js not loaded');
+        return;
+    }
+    init();
+}); 
