@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - ServiceKit</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r132/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/how-it-work.css">
+</head>
+<body>
+    <div id="container">
+        <!-- Header -->
+        <header>
+            <a href="../index.html" class="logo">
+                Service<span>Kit</span>
+            </a>
+      
+            <nav class="main-nav">
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="how-it-works.html" class="nav-link">How It Works</a>
+                <a href="courses.html" class="nav-link">Courses</a>
+                <a href="about.html" class="nav-link">About</a>
+            </nav>
+
+            <button class="menu-btn">
+                <div class="menu-btn__lines">
+                    <span class="menu-btn__line"></span>
+                    <span class="menu-btn__line"></span>
+                    <span class="menu-btn__line"></span>
+                </div>
+            </button>
+
+            <div class="header-buttons d-none d-sm-flex">
+                <a href="#" class="app-btn android-btn">
+                    <i class="fab fa-android"></i>
+                    Android
+                </a>
+                <a href="#" class="app-btn ios-btn">
+                    <i class="fab fa-apple"></i>
+                    iOS
+                </a>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar__bg"></div>
+            <div class="sidebar__header">
+                <a href="../index.html" class="sidebar__logo">
+                    Service<span>Kit</span>
+                </a>
+                <button class="sidebar__close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="sidebar__content">
+                <nav class="sidebar__nav">
+                    <a href="services.html" class="sidebar__nav-link">
+                        <i class="fas fa-tools"></i>
+                        Services
+                    </a>
+                    <a href="how-it-works.html" class="sidebar__nav-link">
+                        <i class="fas fa-info-circle"></i>
+                        How It Works
+                    </a>
+                    <a href="courses.html" class="sidebar__nav-link">
+                        <i class="fas fa-graduation-cap"></i>
+                        Courses
+                    </a>
+                    <a href="about.html" class="sidebar__nav-link">
+                        <i class="fas fa-users"></i>
+                        About
+                    </a>
+                </nav>
+                <div class="sidebar__buttons">
+                    <a href="#" class="app-btn android-btn">
+                        <i class="fab fa-android"></i>
+                        Android
+                    </a>
+                    <a href="#" class="app-btn ios-btn">
+                        <i class="fab fa-apple"></i>
+                        iOS
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Language Switcher -->
+        <div class="language-switcher">
+            <button class="lang-btn" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="ar">عربي</button>
+        </div>
+
+        <!-- How It Works Content -->
+        <div class="how-it-works-hero">
+            <h1 class="title">How It Works</h1>
+            <p class="subtitle">Simple steps to get the service you need</p>
+
+            <div class="steps-container">
+                <!-- Step 1 -->
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Request a Service</h3>
+                        <p class="step-description">
+                            Download our app and create a service request. Specify your needs, location, and preferred time. Our system will match you with qualified technicians in your area.
+                        </p>
+                    </div>
+                    <div class="step-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="connecting-line"></div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Choose Your Technician</h3>
+                        <p class="step-description">
+                            Review profiles of available technicians, including their ratings, experience, and previous work. Select the professional that best matches your requirements.
+                        </p>
+                    </div>
+                    <div class="step-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div class="connecting-line"></div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Get the Job Done</h3>
+                        <p class="step-description">
+                            Your chosen technician will arrive at the scheduled time. They'll complete the work professionally and ensure your complete satisfaction with the service.
+                        </p>
+                    </div>
+                    <div class="step-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="connecting-line"></div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Rate and Review</h3>
+                        <p class="step-description">
+                            After the service is completed, rate your experience and leave a review. Your feedback helps maintain quality standards and assists other users in making informed decisions.
+                        </p>
+                    </div>
+                    <div class="step-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/translations.js"></script>
+    <script>
+        // Language switcher event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set initial active state based on stored language
+            const storedLang = localStorage.getItem('selectedLanguage') || 'en';
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === storedLang);
+            });
+
+            // Add click handlers
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const lang = btn.dataset.lang;
+                    switchLanguage(lang);
+                });
+            });
+
+            // Update direction based on initial language
+            document.documentElement.dir = storedLang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = storedLang;
+        });
+    </script>
+</body>
+</html> 

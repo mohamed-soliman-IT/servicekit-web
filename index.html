@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServiceKit - Connect with Professional Technicians</title>
+    <link rel="stylesheet" href="css/style.css?v=1.0.1">
+    <link rel="stylesheet" href="css/sidebar.css?v=1.0.1">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r132/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/index.css?v=1.0.1">
+    <style>
+
+    </style>
+</head>
+<body>
+    <div id="container">
+        <!-- Header -->
+        <header>
+            <a href="index.html" class="logo">
+                Service<span>Kit</span>
+            </a>
+      
+            <nav class="main-nav">
+                <a href="pages/services.html" class="nav-link">Services</a>
+                <a href="pages/how-it-works.html" class="nav-link">How It Works</a>
+                <a href="pages/courses.html" class="nav-link">Courses</a>
+                <a href="pages/about.html" class="nav-link">About</a>
+            </nav>
+
+            <button class="menu-btn">
+                <div class="menu-btn__lines">
+                    <span class="menu-btn__line"></span>
+                    <span class="menu-btn__line"></span>
+                    <span class="menu-btn__line"></span>
+                </div>
+            </button>
+
+            <div class="header-buttons d-none d-sm-flex">
+                <a href="#" class="app-btn android-btn">
+                    <i class="fab fa-android"></i>
+                    Android
+                </a>
+                <a href="#" class="app-btn ios-btn">
+                    <i class="fab fa-apple"></i>
+                    iOS
+                </a>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar__bg"></div>
+            <div class="sidebar__header">
+                <a href="index.html" class="sidebar__logo">
+                    Service<span>Kit</span>
+                </a>
+                <button class="sidebar__close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="sidebar__content">
+                <nav class="sidebar__nav">
+                    <a href="pages/services.html" class="sidebar__nav-link">
+                        <i class="fas fa-tools"></i>
+                        Services
+                    </a>
+                    <a href="pages/how-it-works.html" class="sidebar__nav-link">
+                        <i class="fas fa-info-circle"></i>
+                        How It Works
+                    </a>
+                    <a href="pages/courses.html" class="sidebar__nav-link">
+                        <i class="fas fa-graduation-cap"></i>
+                        Courses
+                    </a>
+                    <a href="pages/about.html" class="sidebar__nav-link">
+                        <i class="fas fa-users"></i>
+                        About
+                    </a>
+                </nav>
+                <div class="sidebar__buttons">
+                    <a href="#" class="app-btn android-btn">
+                        <i class="fab fa-android"></i>
+                        Android
+                    </a>
+                    <a href="#" class="app-btn ios-btn">
+                        <i class="fab fa-apple"></i>
+                        iOS
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Language Switcher -->
+        <div class="language-switcher">
+            <button class="lang-btn" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="ar">عربي</button>
+        </div>
+
+        <!-- Three.js Scene Container -->
+        <div id="scene-container"></div>
+
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <h1 class="title">Connect with Professional Technicians</h1>
+            <p class="subtitle">Find skilled professionals for all your service needs</p>
+        </div>
+
+        <!-- Floating Service Cards -->
+        <div class="floating-cards">
+            <div class="service-card">
+                <div class="icon"><i class="fas fa-hammer"></i></div>
+                <h3>Carpentry</h3>
+                <p>Expert woodworking and furniture making services</p>
+            </div>
+            <div class="service-card">
+                <div class="icon"><i class="fas fa-wrench"></i></div>
+                <h3>Plumbing</h3>
+                <p>Professional plumbing and pipe installation</p>
+            </div>
+            <div class="service-card">
+                <div class="icon"><i class="fas fa-bolt"></i></div>
+                <h3>Electrical</h3>
+                <p>Safe and reliable electrical services</p>
+            </div>
+            <div class="service-card">
+                <div class="icon"><i class="fas fa-cogs"></i></div>
+                <h3>Mechanical</h3>
+                <p>Precision mechanical repairs and maintenance</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Language switcher event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set initial active state based on stored language
+            const storedLang = localStorage.getItem('selectedLanguage') || 'en';
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === storedLang);
+            });
+
+            // Add click handlers
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const lang = btn.dataset.lang;
+                    switchLanguage(lang);
+                });
+            });
+        });
+    </script>
+
+<script>
+    // Global variables
+let scene, camera, renderer, planet, atmosphere;
+let serviceWords = [];
+let isAnimating = true;
+let particles = [];
+let orbitPoints = [];
+let orbitLine;
+let meteorites = [];
+let services = [
+    { key: 'carpentry', color: 0x00ff00 },
+    { key: 'plumbing', color: 0xff00ff },
+    { key: 'electrical', color: 0x0000ff },
+    { key: 'mechanical', color: 0xffff00 }
+];
+
+// Initialize the scene
+async function init() {
+    // Wait for translations to load
+    await loadTranslations();
+    
+    // Create scene
+    scene = new THREE.Scene();
+    
+    // Create camera
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 7;
+    
+    // Create renderer
+    renderer = new THREE.WebGLRenderer({ 
+        antialias: true,
+        alpha: true
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x000000, 1);
+    
+    // Get container and check if it exists
+    const container = document.getElementById('scene-container');
+    if (container) {
+        container.appendChild(renderer.domElement);
+        
+        // Add lights
+        const ambientLight = new THREE.AmbientLight(0x404040, 2);
+        scene.add(ambientLight);
+        
+        const directionalLight = new THREE.DirectionalLight(0x00ffff, 2);
+        directionalLight.position.set(5, 3, 5);
+        scene.add(directionalLight);
+
+        // Add point lights for better illumination
+        const pointLight1 = new THREE.PointLight(0x00ffff, 1.5);
+        pointLight1.position.set(5, 5, 5);
+        scene.add(pointLight1);
+
+        const pointLight2 = new THREE.PointLight(0x0088ff, 1.5);
+        pointLight2.position.set(-5, -5, -5);
+        scene.add(pointLight2);
+        
+        // Create planet and atmosphere
+        createPlanet();
+        createServiceMeteors();
+        createParticles();
+        
+        // Add event listeners
+        window.addEventListener('resize', onWindowResize);
+        document.addEventListener('mousemove', onMouseMove);
+        
+        // Start animation
+        animate();
+    }
+}
+
+// Create glowing planet
+function createPlanet() {
+    planet = new THREE.Group();
+    
+    // Create core sphere with higher resolution
+    const sphereGeometry = new THREE.SphereGeometry(2, 128, 128);
+    
+    // Create base material with turquoise color
+    const baseMaterial = new THREE.MeshPhongMaterial({
+        color: 0x00ffff,
+        transparent: true,
+        opacity: 0.8,
+        shininess: 25
+    });
+    
+    const baseMesh = new THREE.Mesh(sphereGeometry, baseMaterial);
+    planet.add(baseMesh);
+
+    // Load Earth texture and create Earth sphere
+    const textureLoader = new THREE.TextureLoader();
+    textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_atmos_2048.jpg', 
+        function(texture) {
+            const earthMaterial = new THREE.MeshPhongMaterial({
+                map: texture,
+                transparent: true,
+                opacity: 0.9
+            });
+            const earthMesh = new THREE.Mesh(sphereGeometry, earthMaterial);
+            planet.add(earthMesh);
+        }
+    );
+    
+    // Create outer glow
+    const glowGeometry = new THREE.SphereGeometry(2.2, 64, 64);
+    const glowMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+            glowColor: { value: new THREE.Color(0x00ffff) },
+            viewVector: { value: camera.position }
+        },
+        vertexShader: `
+            uniform vec3 viewVector;
+            varying float intensity;
+            void main() {
+                vec3 vNormal = normalize(normalMatrix * normal);
+                vec3 vNormel = normalize(normalMatrix * viewVector);
+                intensity = pow(0.7 - dot(vNormal, vNormel), 3.0);
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+        `,
+        fragmentShader: `
+            uniform vec3 glowColor;
+            varying float intensity;
+            void main() {
+                vec3 glow = glowColor * intensity;
+                gl_FragColor = vec4(glow, 0.2);
+            }
+        `,
+        side: THREE.BackSide,
+        blending: THREE.AdditiveBlending,
+        transparent: true
+    });
+    
+    const glowMesh = new THREE.Mesh(glowGeometry, glowMaterial);
+    planet.add(glowMesh);
+    
+    // Create grid pattern
+    const gridGeometry = new THREE.SphereGeometry(2.01, 32, 32);
+    const gridMaterial = new THREE.MeshBasicMaterial({
+        color: 0x00ffff,
+        transparent: true,
+        opacity: 0.1,
+        wireframe: true
+    });
+    const grid = new THREE.Mesh(gridGeometry, gridMaterial);
+    planet.add(grid);
+    
+    // Add ambient particles
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particlesCnt = 2000;
+    const posArray = new Float32Array(particlesCnt * 3);
+    
+    for(let i = 0; i < particlesCnt * 3; i++) {
+        posArray[i] = (Math.random() - 0.5) * 5;
+    }
+    
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+    const particlesMaterial = new THREE.PointsMaterial({
+        size: 0.005,
+        color: 0x00ffff,
+        transparent: true,
+        opacity: 0.4,
+        blending: THREE.AdditiveBlending
+    });
+    
+    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+    planet.add(particlesMesh);
+    
+    scene.add(planet);
+}
+
+// Create background particles
+function createParticles() {
+    const colors = [0x00ffff, 0x0088ff, 0x0044ff];
+    
+    for (let i = 0; i < 300; i++) {
+        const geometry = new THREE.SphereGeometry(0.01, 8, 8);
+        const material = new THREE.MeshPhongMaterial({
+            color: colors[Math.floor(Math.random() * colors.length)],
+            transparent: true,
+            opacity: Math.random() * 0.5 + 0.25
+        });
+        
+        const particle = new THREE.Mesh(geometry, material);
+        
+        // Random position in a sphere
+        const radius = Math.random() * 15 + 5;
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.random() * Math.PI;
+        
+        particle.position.x = radius * Math.sin(phi) * Math.cos(theta);
+        particle.position.y = radius * Math.sin(phi) * Math.sin(theta);
+        particle.position.z = radius * Math.cos(phi);
+        
+        particle.userData = {
+            rotationSpeed: {
+                x: (Math.random() - 0.5) * 0.01,
+                y: (Math.random() - 0.5) * 0.01,
+                z: (Math.random() - 0.5) * 0.01
+            },
+            originalPosition: particle.position.clone(),
+            movementOffset: Math.random() * Math.PI * 2
+        };
+        
+        particles.push(particle);
+        scene.add(particle);
+    }
+}
+
+// Create service meteors
+function createServiceMeteors() {
+    const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+    
+    services.forEach((service, index) => {
+        const serviceGroup = new THREE.Group();
+        serviceGroup.userData.isSelectable = true;
+
+        // Create main cube
+        const cubeGeometry = new THREE.BoxGeometry(0.4, 0.4, 0.4);
+        const cubeMaterial = new THREE.MeshPhongMaterial({
+            color: service.color,
+            transparent: true,
+            opacity: 0.8,
+            wireframe: true
+        });
+        const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+        serviceGroup.add(cube);
+
+        // Add glowing edges
+        const edges = new THREE.EdgesGeometry(cubeGeometry);
+        const edgesMaterial = new THREE.LineBasicMaterial({
+            color: service.color,
+            transparent: true,
+            opacity: 0.5
+        });
+        const edgesMesh = new THREE.LineSegments(edges, edgesMaterial);
+        serviceGroup.add(edgesMesh);
+
+        // Create text display group that will always face camera
+        const textGroup = new THREE.Group();
+
+        // Create background panel
+        const panelGeometry = new THREE.PlaneGeometry(2, 0.6);
+        const panelMaterial = new THREE.MeshPhongMaterial({
+            color: 0x000000,
+            transparent: true,
+            opacity: 0.7,
+            side: THREE.DoubleSide
+        });
+        const panel = new THREE.Mesh(panelGeometry, panelMaterial);
+        
+        // Add glow to panel edges
+        const glowGeometry = new THREE.PlaneGeometry(2.1, 0.7);
+        const glowMaterial = new THREE.MeshBasicMaterial({
+            color: service.color,
+            transparent: true,
+            opacity: 0.3,
+            side: THREE.DoubleSide
+        });
+        const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+        glow.position.z = -0.01;
+        textGroup.add(glow);
+        textGroup.add(panel);
+
+        // Create text texture
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.width = 512;
+        canvas.height = 128;
+
+        // Fill background
+        context.fillStyle = 'rgba(0, 0, 0, 0)';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Draw text
+        context.font = 'bold 72px Arial';
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        
+        // Get translated service name
+        const serviceName = translations[currentLang].services[service.key].title;
+        
+        // Add white outline
+        context.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+        context.lineWidth = 8;
+        context.strokeText(serviceName, canvas.width/2, canvas.height/2);
+        
+        // Add colored glow
+        context.shadowColor = `rgb(${service.color >> 16}, ${(service.color >> 8) & 255}, ${service.color & 255})`;
+        context.shadowBlur = 20;
+        context.fillStyle = '#ffffff';
+        context.fillText(serviceName, canvas.width/2, canvas.height/2);
+
+        const texture = new THREE.CanvasTexture(canvas);
+        texture.minFilter = THREE.LinearFilter;
+        texture.magFilter = THREE.LinearFilter;
+
+        const textGeometry = new THREE.PlaneGeometry(1.9, 0.5);
+        const textMaterial = new THREE.MeshBasicMaterial({
+            map: texture,
+            transparent: true,
+            side: THREE.DoubleSide,
+            depthTest: false,
+            depthWrite: false
+        });
+
+        const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+        textMesh.position.z = 0.01;
+        textGroup.add(textMesh);
+
+        // Position text group
+        textGroup.position.set(1.2, 0.3, 0);
+        serviceGroup.add(textGroup);
+
+        // Set initial position
+        const angle = (index / services.length) * Math.PI * 2;
+        const orbitRadius = 3;
+        const orbitHeight = (index % 2 === 0 ? 0.5 : -0.5);
+        
+        serviceGroup.position.set(
+            Math.cos(angle) * orbitRadius,
+            orbitHeight,
+            Math.sin(angle) * orbitRadius
+        );
+        
+        serviceGroup.userData = {
+            angle: angle,
+            speed: 0.003,
+            radius: orbitRadius,
+            height: orbitHeight,
+            rotationSpeed: {
+                x: 0.0005,
+                y: 0.0005,
+                z: 0.0005
+            },
+            serviceKey: service.key // Store the service key for updating translations
+        };
+
+        scene.add(serviceGroup);
+        meteorites.push(serviceGroup);
+    });
+}
+
+// Add function to update service names when language changes
+async function updateServiceNames() {
+    // Ensure translations are loaded
+    if (!translations) {
+        await loadTranslations();
+    }
+    
+    const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+    
+    // Clear existing meteorites
+    meteorites.forEach(meteor => {
+        scene.remove(meteor);
+    });
+    meteorites = [];
+    
+    // Recreate service meteors with new translations
+    createServiceMeteors();
+}
+
+// Add event listener for language changes
+document.addEventListener('languageChanged', async () => {
+    await updateServiceNames();
+});
+
+// Animation loop
+function animate() {
+    requestAnimationFrame(animate);
+    
+    if (planet) {
+        planet.rotation.y += 0.002;
+    }
+    
+    // Animate meteorites
+    meteorites.forEach(meteor => {
+        meteor.userData.angle += meteor.userData.speed;
+        
+        // Update position
+        meteor.position.x = Math.cos(meteor.userData.angle) * meteor.userData.radius;
+        meteor.position.z = Math.sin(meteor.userData.angle) * meteor.userData.radius;
+        meteor.position.y = meteor.userData.height + Math.sin(meteor.userData.angle * 2) * 0.1;
+        
+        // Rotate the cube
+        meteor.children[0].rotation.x += meteor.userData.rotationSpeed.x;
+        meteor.children[0].rotation.y += meteor.userData.rotationSpeed.y;
+        meteor.children[0].rotation.z += meteor.userData.rotationSpeed.z;
+
+        // Make text always face camera
+        const textGroup = meteor.children[1];
+        textGroup.lookAt(camera.position);
+    });
+
+    // Animate background particles
+    const time = Date.now() * 0.001;
+    particles.forEach(particle => {
+        particle.rotation.x += particle.userData.rotationSpeed.x;
+        particle.rotation.y += particle.userData.rotationSpeed.y;
+        particle.rotation.z += particle.userData.rotationSpeed.z;
+        
+        const offset = particle.userData.movementOffset;
+        const originalPos = particle.userData.originalPosition;
+        
+        particle.position.x = originalPos.x + Math.sin(time + offset) * 0.3;
+        particle.position.y = originalPos.y + Math.cos(time + offset) * 0.3;
+        particle.position.z = originalPos.z + Math.sin(time * 0.5 + offset) * 0.3;
+    });
+    
+    renderer.render(scene, camera);
+}
+
+// Handle window resize
+function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+// Handle mouse movement
+function onMouseMove(event) {
+    if (planet) {
+        const mouseX = (event.clientX - window.innerWidth / 2) / 100;
+        const mouseY = (event.clientY - window.innerHeight / 2) / 100;
+        const targetRotationY = -Math.PI * 0.1 + mouseX * 0.2;
+        const targetRotationX = Math.PI * 0.1 + mouseY * 0.2;
+        planet.rotation.y += (targetRotationY - planet.rotation.y) * 0.05;
+        planet.rotation.x += (targetRotationX - planet.rotation.x) * 0.05;
+    }
+}
+
+// Initialize everything when the page loads
+window.addEventListener('load', init); 
+</script>
+
+<script>
+    class Sidebar {
+    constructor() {
+        this.menuBtn = document.querySelector('.menu-btn');
+        this.sidebar = document.querySelector('.sidebar');
+        this.sidebarBg = document.querySelector('.sidebar__bg');
+        this.closeBtn = document.querySelector('.sidebar__close');
+        this.isOpen = false;
+        
+        this.init();
+    }
+
+    init() {
+        // Initialize Three.js scene
+        this.initThreeJS();
+        
+        // Add event listeners
+        this.menuBtn.addEventListener('click', () => this.toggleSidebar());
+        this.closeBtn.addEventListener('click', () => this.closeSidebar());
+        
+        // Close sidebar when clicking outside
+        document.addEventListener('click', (e) => {
+            if (this.isOpen && !this.sidebar.contains(e.target) && !this.menuBtn.contains(e.target)) {
+                this.closeSidebar();
+            }
+        });
+
+        // Close sidebar when pressing Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.isOpen) {
+                this.closeSidebar();
+            }
+        });
+
+        // Close sidebar when clicking a link
+        document.querySelectorAll('.sidebar__nav-link').forEach(link => {
+            link.addEventListener('click', () => this.closeSidebar());
+        });
+
+        // Update sidebar content on initial load
+        this.updateSidebarContent();
+
+        // Listen for language changes
+        document.addEventListener('languageChanged', () => {
+            this.updateSidebarContent();
+        });
+    }
+
+    updateSidebarContent() {
+        const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+        const navLinks = this.sidebar.querySelectorAll('.sidebar__nav-link');
+        const services = ['services', 'howItWorks', 'courses', 'about'];
+        const icons = ['fa-tools', 'fa-info-circle', 'fa-graduation-cap', 'fa-users'];
+        
+        navLinks.forEach((link, index) => {
+            const key = services[index];
+            if (translations && translations[currentLang] && translations[currentLang].nav[key]) {
+                link.innerHTML = `<i class="fas ${icons[index]}"></i> ${translations[currentLang].nav[key]}`;
+            }
+        });
+
+        // Update app buttons in sidebar
+        const appButtons = this.sidebar.querySelectorAll('.app-btn');
+        appButtons.forEach(btn => {
+            const isAndroid = btn.classList.contains('android-btn');
+            const key = isAndroid ? 'android' : 'ios';
+            if (translations && translations[currentLang] && translations[currentLang].app[key]) {
+                btn.innerHTML = `<i class="fab fa-${isAndroid ? 'android' : 'apple'}"></i> ${translations[currentLang].app[key]}`;
+            }
+        });
+    }
+
+    initThreeJS() {
+        // Create scene
+        const scene = new THREE.Scene();
+        
+        // Create camera
+        const camera = new THREE.PerspectiveCamera(75, this.sidebarBg.clientWidth / this.sidebarBg.clientHeight, 0.1, 1000);
+        camera.position.z = 5;
+        
+        // Create renderer
+        const renderer = new THREE.WebGLRenderer({ 
+            alpha: true, 
+            antialias: true,
+            powerPreference: "high-performance"
+        });
+        renderer.setSize(this.sidebarBg.clientWidth, this.sidebarBg.clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        this.sidebarBg.appendChild(renderer.domElement);
+        
+        // Create particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 2000;
+        
+        const posArray = new Float32Array(particlesCount * 3);
+        const colorArray = new Float32Array(particlesCount * 3);
+        
+        for(let i = 0; i < particlesCount * 3; i++) {
+            // Position
+            posArray[i] = (Math.random() - 0.5) * 10;
+            
+            // Color
+            const color = new THREE.Color();
+            color.setHSL(Math.random() * 0.1 + 0.5, 0.8, 0.5);
+            colorArray[i] = color.r;
+            colorArray[i + 1] = color.g;
+            colorArray[i + 2] = color.b;
+        }
+        
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
+        
+        // Create material
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.02,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending,
+            sizeAttenuation: true
+        });
+        
+        // Create mesh
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+        
+        // Mouse movement effect
+        let mouseX = 0;
+        let mouseY = 0;
+        
+        document.addEventListener('mousemove', (event) => {
+            if (this.isOpen) {
+                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+            }
+        });
+        
+        // Animation
+        const animate = () => {
+            requestAnimationFrame(animate);
+            
+            if (this.isOpen) {
+                particlesMesh.rotation.x += 0.0005;
+                particlesMesh.rotation.y += 0.0005;
+                
+                // Add mouse movement effect
+                particlesMesh.rotation.x += mouseY * 0.0005;
+                particlesMesh.rotation.y += mouseX * 0.0005;
+            }
+            
+            renderer.render(scene, camera);
+        };
+        
+        animate();
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = this.sidebarBg.clientWidth / this.sidebarBg.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(this.sidebarBg.clientWidth, this.sidebarBg.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        });
+    }
+
+    toggleSidebar() {
+        if (this.isOpen) {
+            this.closeSidebar();
+        } else {
+            this.openSidebar();
+        }
+    }
+
+    openSidebar() {
+        this.sidebar.classList.add('active');
+        this.menuBtn.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        this.isOpen = true;
+    }
+
+    closeSidebar() {
+        this.sidebar.classList.remove('active');
+        this.menuBtn.classList.remove('active');
+        document.body.style.overflow = '';
+        this.isOpen = false;
+    }
+}
+
+// Initialize sidebar when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new Sidebar();
+});
+
+</script>
+
+<script>
+    let translations = null;
+let currentLang = localStorage.getItem('selectedLanguage') || 'en';
+
+async function loadTranslations() {
+    try {
+        const response = await fetch('/js/translations.json');
+        translations = await response.json();
+        return translations;
+    } catch (error) {
+        console.error('Error loading translations:', error);
+        return null;
+    }
+}
+
+function updateDirection(lang) {
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = lang;
+}
+
+function updateLogo() {
+    const logos = document.querySelectorAll('.logo, .sidebar__logo');
+    logos.forEach(logo => {
+        logo.innerHTML = 'Service<span>Kit</span>';
+    });
+}
+
+function updateNavigation(lang) {
+    // Update main navigation
+    const mainNavLinks = document.querySelectorAll('.main-nav .nav-link');
+    const services = ['services', 'howItWorks', 'courses', 'about'];
+    
+    mainNavLinks.forEach((link, index) => {
+        const key = services[index];
+        if (translations && translations[lang] && translations[lang].nav[key]) {
+            link.textContent = translations[lang].nav[key];
+        }
+    });
+
+    // Update sidebar navigation
+    const sidebarNavLinks = document.querySelectorAll('.sidebar__nav-link');
+    const icons = ['fa-tools', 'fa-info-circle', 'fa-graduation-cap', 'fa-users'];
+    
+    sidebarNavLinks.forEach((link, index) => {
+        const key = services[index];
+        if (translations && translations[lang] && translations[lang].nav[key]) {
+            link.innerHTML = `<i class="fas ${icons[index]}"></i> ${translations[lang].nav[key]}`;
+        }
+    });
+}
+
+function updateHero(lang) {
+    const title = document.querySelector('.title');
+    const subtitle = document.querySelector('.subtitle');
+    
+    if (title) title.textContent = translations[lang].hero.title;
+    if (subtitle) subtitle.textContent = translations[lang].hero.subtitle;
+}
+
+function updateServiceCards(lang) {
+    const services = ['carpentry', 'plumbing', 'electrical', 'mechanical'];
+    const cards = document.querySelectorAll('.service-card');
+    
+    cards.forEach((card, index) => {
+        const service = services[index];
+        const title = card.querySelector('h3');
+        const description = card.querySelector('p');
+        
+        if (title) title.textContent = translations[lang].services[service].title;
+        if (description) description.textContent = translations[lang].services[service].description;
+    });
+
+    // Update service items in services page
+    const serviceItems = document.querySelectorAll('.service-item');
+    serviceItems.forEach((item, index) => {
+        const service = services[index];
+        const title = item.querySelector('.service-title');
+        const description = item.querySelector('.service-description');
+        
+        if (title) title.textContent = translations[lang].services[service].title;
+        if (description) description.textContent = translations[lang].services[service].description;
+    });
+
+    // Update course cards in courses page
+    const courseCards = document.querySelectorAll('.course-card');
+    courseCards.forEach((card, index) => {
+        const service = services[index];
+        const title = card.querySelector('.course-title');
+        
+        if (title) title.textContent = translations[lang].services[service].title;
+    });
+}
+
+function updateAppButtons(lang) {
+    const appButtons = document.querySelectorAll('.app-btn');
+    
+    appButtons.forEach(btn => {
+        const isAndroid = btn.classList.contains('android-btn');
+        const key = isAndroid ? 'android' : 'ios';
+        btn.innerHTML = `<i class="fab fa-${isAndroid ? 'android' : 'apple'}"></i> ${translations[lang].app[key]}`;
+    });
+}
+
+function updateHowItWorks(lang) {
+    const title = document.querySelector('.how-it-works-hero .title');
+    const subtitle = document.querySelector('.how-it-works-hero .subtitle');
+    
+    if (title) title.textContent = translations[lang].howItWorks.title;
+    if (subtitle) subtitle.textContent = translations[lang].howItWorks.subtitle;
+
+    // Update steps
+    const steps = document.querySelectorAll('.step');
+    const stepKeys = ['requestService', 'chooseTechnician', 'getJobDone', 'rateReview'];
+    
+    steps.forEach((step, index) => {
+        const key = stepKeys[index];
+        const stepTitle = step.querySelector('.step-title');
+        const stepDescription = step.querySelector('.step-description');
+        
+        if (stepTitle) stepTitle.textContent = translations[lang].howItWorks.steps[key].title;
+        if (stepDescription) stepDescription.textContent = translations[lang].howItWorks.steps[key].description;
+    });
+}
+
+function updateAbout(lang) {
+    const title = document.querySelector('.about-hero .title');
+    const subtitle = document.querySelector('.about-hero .subtitle');
+    
+    if (title) title.textContent = translations[lang].about.title;
+    if (subtitle) subtitle.textContent = translations[lang].about.subtitle;
+
+    // Update Mission & Vision
+    const missionTitle = document.querySelector('.mission-card h3');
+    const missionDesc = document.querySelector('.mission-card p');
+    const visionTitle = document.querySelector('.vision-card h3');
+    const visionDesc = document.querySelector('.vision-card p');
+
+    if (missionTitle) missionTitle.textContent = translations[lang].about.mission.title;
+    if (missionDesc) missionDesc.textContent = translations[lang].about.mission.description;
+    if (visionTitle) visionTitle.textContent = translations[lang].about.vision.title;
+    if (visionDesc) visionDesc.textContent = translations[lang].about.vision.description;
+
+    // Update Team Section
+    const teamTitle = document.querySelector('.section-title');
+    if (teamTitle) teamTitle.textContent = translations[lang].about.team.title;
+
+    // Update Team Members
+    const teamMembers = document.querySelectorAll('.team-member');
+    const memberKeys = ['ceo', 'cto', 'operations'];
+    
+    teamMembers.forEach((member, index) => {
+        const key = memberKeys[index];
+        const memberName = member.querySelector('.member-name');
+        const memberRole = member.querySelector('.member-role');
+        const memberBio = member.querySelector('.member-bio');
+        
+        if (memberName) memberName.textContent = translations[lang].about.team.members[key].name;
+        if (memberRole) memberRole.textContent = translations[lang].about.team.members[key].role;
+        if (memberBio) memberBio.textContent = translations[lang].about.team.members[key].bio;
+    });
+}
+
+function updateServices(lang) {
+    // Update title and subtitle
+    const title = document.querySelector('.services-hero .title');
+    const subtitle = document.querySelector('.services-hero .subtitle');
+    if (title) title.textContent = translations[lang].services.title;
+    if (subtitle) subtitle.textContent = translations[lang].services.subtitle;
+
+    // Update service items
+    const serviceItems = document.querySelectorAll('.service-item');
+    const serviceTypes = ['carpentry', 'plumbing', 'electrical', 'mechanical'];
+    
+    serviceItems.forEach((item, index) => {
+        const type = serviceTypes[index];
+        const serviceData = translations[lang].services[type];
+        
+        // Update title and description
+        const title = item.querySelector('.service-title');
+        const description = item.querySelector('.service-description');
+        if (title) title.textContent = serviceData.title;
+        if (description) description.textContent = serviceData.description;
+
+        // Update features
+        const features = item.querySelectorAll('.service-features li');
+        features.forEach((feature, fIndex) => {
+            feature.textContent = serviceData.features[fIndex];
+        });
+    });
+}
+
+function updateCourses(lang) {
+    // Update title and subtitle
+    const title = document.querySelector('.courses-hero .title');
+    const subtitle = document.querySelector('.courses-hero .subtitle');
+    if (title) title.textContent = translations[lang].courses.title;
+    if (subtitle) subtitle.textContent = translations[lang].courses.subtitle;
+
+    // Update course cards
+    const courseCards = document.querySelectorAll('.course-card');
+    const courseTypes = ['carpentry', 'plumbing', 'electrical', 'mechanical'];
+    const levels = ['beginner', 'intermediate', 'advanced', 'expert'];
+    
+    courseCards.forEach((card, index) => {
+        const type = courseTypes[index];
+        const courseData = translations[lang].courses.items[type];
+        
+        // Update level
+        const level = card.querySelector('.course-level');
+        if (level) level.textContent = translations[lang].courses.levels[levels[index]];
+
+        // Update title and description
+        const title = card.querySelector('.course-title');
+        const description = card.querySelector('.course-description');
+        if (title) title.textContent = courseData.title;
+        if (description) description.textContent = courseData.description;
+
+        // Update course details
+        const details = card.querySelectorAll('.course-detail span');
+        if (details[0]) details[0].textContent = details[0].textContent.replace(/\d+/, '') + translations[lang].courses.details.weeks;
+        if (details[1]) details[1].textContent = details[1].textContent.replace(/\d+/, '') + translations[lang].courses.details.students;
+
+        // Update enroll button
+        const enrollBtn = card.querySelector('.course-cta');
+        if (enrollBtn) enrollBtn.textContent = translations[lang].courses.enroll;
+    });
+
+    // Update modal content if it exists
+    const modal = document.getElementById('downloadModal');
+    if (modal) {
+        const modalTitle = modal.querySelector('.modal-header h2');
+        const modalSubtitle = modal.querySelector('.modal-header p');
+        const androidBtn = modal.querySelector('.android-btn .btn-text');
+        const iosBtn = modal.querySelector('.ios-btn .btn-text');
+
+        if (modalTitle) modalTitle.textContent = translations[lang].courses.modal.title;
+        if (modalSubtitle) modalSubtitle.textContent = translations[lang].courses.modal.subtitle;
+        
+        if (androidBtn) {
+            androidBtn.querySelector('.small-text').textContent = translations[lang].courses.modal.android.small;
+            androidBtn.querySelector('.large-text').textContent = translations[lang].courses.modal.android.large;
+        }
+        
+        if (iosBtn) {
+            iosBtn.querySelector('.small-text').textContent = translations[lang].courses.modal.ios.small;
+            iosBtn.querySelector('.large-text').textContent = translations[lang].courses.modal.ios.large;
+        }
+    }
+}
+
+async function switchLanguage(lang) {
+    await loadTranslations();
+    currentLang = lang;
+    localStorage.setItem('selectedLanguage', lang);
+    
+    updateDirection(lang);
+    updateLogo();
+    updateNavigation(lang);
+    updateHero(lang);
+    updateServiceCards(lang);
+    updateAppButtons(lang);
+    updateHowItWorks(lang);
+    updateAbout(lang);
+    updateServices(lang);
+    updateCourses(lang);
+    
+    // Update active state of language buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+
+    // Dispatch language changed event
+    document.dispatchEvent(new Event('languageChanged'));
+}
+
+// Initialize translations and set initial language
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadTranslations();
+    switchLanguage(currentLang);
+}); 
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html> 

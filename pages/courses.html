@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - ServiceKit</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r132/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/courses.css">
+</head>
+<body>
+    <div id="container">
+        <!-- Header -->
+        <header>
+            <a href="../index.html" class="logo">
+                Service<span>Kit</span>
+            </a>
+      
+            <nav class="main-nav">
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="how-it-works.html" class="nav-link">How It Works</a>
+                <a href="courses.html" class="nav-link">Courses</a>
+                <a href="about.html" class="nav-link">About</a>
+            </nav>
+
+            <button class="menu-btn">
+                <div class="menu-btn__lines">
+                    <span class="menu-btn__line"></span>
+                    <span class="menu-btn__line"></span>
+                    <span class="menu-btn__line"></span>
+                </div>
+            </button>
+
+            <div class="header-buttons d-none d-sm-flex">
+                <a href="#" class="app-btn android-btn">
+                    <i class="fab fa-android"></i>
+                    Android
+                </a>
+                <a href="#" class="app-btn ios-btn">
+                    <i class="fab fa-apple"></i>
+                    iOS
+                </a>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar__bg"></div>
+            <div class="sidebar__header">
+                <a href="../index.html" class="sidebar__logo">
+                    Service<span>Kit</span>
+                </a>
+                <button class="sidebar__close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="sidebar__content">
+                <nav class="sidebar__nav">
+                    <a href="services.html" class="sidebar__nav-link">
+                        <i class="fas fa-tools"></i>
+                        Services
+                    </a>
+                    <a href="how-it-works.html" class="sidebar__nav-link">
+                        <i class="fas fa-info-circle"></i>
+                        How It Works
+                    </a>
+                    <a href="courses.html" class="sidebar__nav-link">
+                        <i class="fas fa-graduation-cap"></i>
+                        Courses
+                    </a>
+                    <a href="about.html" class="sidebar__nav-link">
+                        <i class="fas fa-users"></i>
+                        About
+                    </a>
+                </nav>
+                <div class="sidebar__buttons">
+                    <a href="#" class="app-btn android-btn">
+                        <i class="fab fa-android"></i>
+                        Android
+                    </a>
+                    <a href="#" class="app-btn ios-btn">
+                        <i class="fab fa-apple"></i>
+                        iOS
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Language Switcher -->
+        <div class="language-switcher">
+            <button class="lang-btn" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="ar">عربي</button>
+        </div>
+        <!-- Courses Content -->
+        <div class="courses-hero mt-5">
+            <h1 class="title">Professional Courses</h1>
+            <p class="subtitle">Enhance your skills with our expert-led training programs</p>
+
+            <div class="courses-grid">
+                <!-- Carpentry Course -->
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
+                        <span class="course-level">Beginner</span>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Modern Carpentry</h3>
+                        <p class="course-description">
+                            Learn essential woodworking skills and techniques for creating beautiful, functional pieces.
+                        </p>
+                        <div class="course-details">
+                            <div class="course-detail">
+                                <i class="far fa-clock"></i>
+                                <span>8 weeks</span>
+                            </div>
+                            <div class="course-detail">
+                                <i class="fas fa-users"></i>
+                                <span>24 students</span>
+                            </div>
+                        </div>
+                        <a href="#" class="course-cta">Enroll Now</a>
+                    </div>
+                </div>
+
+                <!-- Plumbing Course -->
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1581093458791-9d15482442f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
+                        <span class="course-level">Intermediate</span>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Professional Plumbing</h3>
+                        <p class="course-description">
+                            Master plumbing installation, repair, and maintenance techniques for residential and commercial properties.
+                        </p>
+                        <div class="course-details">
+                            <div class="course-detail">
+                                <i class="far fa-clock"></i>
+                                <span>12 weeks</span>
+                            </div>
+                            <div class="course-detail">
+                                <i class="fas fa-users"></i>
+                                <span>18 students</span>
+                            </div>
+                        </div>
+                        <a href="#" class="course-cta">Enroll Now</a>
+                    </div>
+                </div>
+
+                <!-- Electrical Course -->
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
+                        <span class="course-level">Advanced</span>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Electrical Systems</h3>
+                        <p class="course-description">
+                            Comprehensive training in electrical installation, safety protocols, and system maintenance.
+                        </p>
+                        <div class="course-details">
+                            <div class="course-detail">
+                                <i class="far fa-clock"></i>
+                                <span>16 weeks</span>
+                            </div>
+                            <div class="course-detail">
+                                <i class="fas fa-users"></i>
+                                <span>15 students</span>
+                            </div>
+                        </div>
+                        <a href="#" class="course-cta">Enroll Now</a>
+                    </div>
+                </div>
+
+                <!-- Mechanical Course -->
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1581092921461-39b9d08a9b21?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
+                        <span class="course-level">Expert</span>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Mechanical Engineering</h3>
+                        <p class="course-description">
+                            Advanced training in mechanical systems, equipment maintenance, and industrial applications.
+                        </p>
+                        <div class="course-details">
+                            <div class="course-detail">
+                                <i class="far fa-clock"></i>
+                                <span>20 weeks</span>
+                            </div>
+                            <div class="course-detail">
+                                <i class="fas fa-users"></i>
+                                <span>12 students</span>
+                            </div>
+                        </div>
+                        <a href="#" class="course-cta">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download App Modal -->
+    <div class="download-modal" id="downloadModal">
+        <div class="modal-content">
+            <div class="modal-3d-container" id="modal3DContainer"></div>
+            <div class="modal-overlay">
+                <button class="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="modal-header">
+                    <h2>Download Our App</h2>
+                    <p>Get started with our mobile app to enroll in courses</p>
+                </div>
+                <div class="modal-buttons">
+                    <a href="#" class="modal-btn android-btn">
+                        <i class="fab fa-android"></i>
+                        <div class="btn-text">
+                            <span class="small-text">GET IT ON</span>
+                            <span class="large-text">Google Play</span>
+                        </div>
+                    </a>
+                    <a href="#" class="modal-btn ios-btn">
+                        <i class="fab fa-apple"></i>
+                        <div class="btn-text">
+                            <span class="small-text">Download on the</span>
+                            <span class="large-text">App Store</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/translations.js"></script>
+    <script>
+        // Language switcher event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set initial active state based on stored language
+            const storedLang = localStorage.getItem('selectedLanguage') || 'en';
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === storedLang);
+            });
+
+            // Add click handlers
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const lang = btn.dataset.lang;
+                    switchLanguage(lang);
+                });
+            });
+        });
+
+        // Modal functionality
+        const modal = document.getElementById('downloadModal');
+        const enrollButtons = document.querySelectorAll('.course-cta');
+        const closeButton = document.querySelector('.modal-close');
+
+        // Three.js Modal Background
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        const container = document.getElementById('modal3DContainer');
+        
+        renderer.setSize(container.offsetWidth, container.offsetHeight);
+        container.appendChild(renderer.domElement);
+
+        // Create particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 2000;
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 5;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.005,
+            color: '#00ffff',
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        camera.position.z = 2;
+
+        // Animation
+        function animate() {
+            requestAnimationFrame(animate);
+            particlesMesh.rotation.x += 0.0005;
+            particlesMesh.rotation.y += 0.0005;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = container.offsetWidth / container.offsetHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.offsetWidth, container.offsetHeight);
+        });
+
+        // Open modal when clicking any enroll button
+        enrollButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Close modal when clicking close button
+        closeButton.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+
+</body>
+</html> 
