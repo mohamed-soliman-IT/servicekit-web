@@ -16,20 +16,17 @@ async function loadTranslations() {
             try {
                 response = await fetch(path);
                 if (response.ok) {
-                    break;
+                    const data = await response.json();
+                    translations = data;
+                    return translations;
                 }
             } catch (e) {
+                console.warn(`Failed to load translations from ${path}:`, e);
                 continue;
             }
         }
 
-        if (!response || !response.ok) {
-            throw new Error('Could not load translations file');
-        }
-
-        const data = await response.json();
-        translations = data;
-        return translations;
+        throw new Error('Could not load translations file from any path');
     } catch (error) {
         console.error('Error loading translations:', error);
         // Fallback to default translations if loading fails

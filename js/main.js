@@ -34,7 +34,7 @@ async function init() {
         });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        renderer.setClearColor(0x000000, 1);
+        renderer.setClearColor(0x000000, 0); // Set alpha to 0 for transparency
         
         // Get container and check if it exists
         const container = document.getElementById('scene-container');
@@ -43,8 +43,14 @@ async function init() {
             return;
         }
 
-        // Clear any existing content
+        // Clear any existing content and set container styles
         container.innerHTML = '';
+        container.style.position = 'fixed';
+        container.style.top = '0';
+        container.style.left = '0';
+        container.style.width = '100%';
+        container.style.height = '100%';
+        container.style.zIndex = '-1';
         container.appendChild(renderer.domElement);
         
         // Add lights
@@ -458,5 +464,12 @@ window.addEventListener('load', () => {
         console.error('Three.js not loaded');
         return;
     }
+    
+    // Check if WebGL is available
+    if (!THREE.WEBGL.isWebGLAvailable()) {
+        console.error('WebGL is not available');
+        return;
+    }
+    
     init();
 }); 
