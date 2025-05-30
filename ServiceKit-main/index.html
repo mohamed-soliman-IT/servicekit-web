@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServiceKit - Connect with Professional Technicians</title>
+    <link rel="stylesheet" href="css/style.css?v=1.0.1">
+    <link rel="stylesheet" href="css/sidebar.css?v=1.0.1">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css?v=1.0.1">
+    
+    <!-- Three.js and dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r132/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/WebGL.js"></script>
+    
+    <!-- Application scripts -->
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+    
+    <style>
+        #scene-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: transparent;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <!-- Header -->
+        <header>
+            <a href="index.html" class="logo">
+                Service<span>Kit</span>
+            </a>
+      
+            <nav class="main-nav">
+                <a href="pages/services.html" class="nav-link">Services</a>
+                <a href="pages/how-it-works.html" class="nav-link">How It Works</a>
+                <a href="pages/courses.html" class="nav-link">Courses</a>
+                <a href="pages/about.html" class="nav-link">About</a>
+            </nav>
+
+            <button class="menu-btn">
+                <div class="menu-btn__lines">
+                    <span class="menu-btn__line"></span>
+                    <span class="menu-btn__line"></span>
+                    <span class="menu-btn__line"></span>
+                </div>
+            </button>
+
+            <div class="header-buttons d-none d-sm-flex">
+                <a href="#" class="app-btn android-btn">
+                    <i class="fab fa-android"></i>
+                    Android
+                </a>
+                <a href="#" class="app-btn ios-btn">
+                    <i class="fab fa-apple"></i>
+                    iOS
+                </a>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar__bg"></div>
+            <div class="sidebar__header">
+                <a href="index.html" class="sidebar__logo">
+                    Service<span>Kit</span>
+                </a>
+                <button class="sidebar__close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="sidebar__content">
+                <nav class="sidebar__nav">
+                    <a href="pages/services.html" class="sidebar__nav-link">
+                        <i class="fas fa-tools"></i>
+                        Services
+                    </a>
+                    <a href="pages/how-it-works.html" class="sidebar__nav-link">
+                        <i class="fas fa-info-circle"></i>
+                        How It Works
+                    </a>
+                    <a href="pages/courses.html" class="sidebar__nav-link">
+                        <i class="fas fa-graduation-cap"></i>
+                        Courses
+                    </a>
+                    <a href="pages/about.html" class="sidebar__nav-link">
+                        <i class="fas fa-users"></i>
+                        About
+                    </a>
+                </nav>
+                <div class="sidebar__buttons">
+                    <a href="#" class="app-btn android-btn">
+                        <i class="fab fa-android"></i>
+                        Android
+                    </a>
+                    <a href="#" class="app-btn ios-btn">
+                        <i class="fab fa-apple"></i>
+                        iOS
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Language Switcher -->
+        <div class="language-switcher">
+            <button class="lang-btn" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="ar">عربي</button>
+        </div>
+
+        <!-- Three.js Scene Container -->
+        <div id="scene-container"></div>
+
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <h1 class="title">Connect with Professional Technicians</h1>
+            <p class="subtitle">Find skilled professionals for all your service needs</p>
+        </div>
+
+        <!-- Floating Service Cards -->
+        <div class="floating-cards">
+            <div class="service-card">
+                <div class="icon"><i class="fas fa-hammer"></i></div>
+                <h3>Carpentry</h3>
+                <p>Expert woodworking and furniture making services</p>
+            </div>
+            <div class="service-card">
+                <div class="icon"><i class="fas fa-wrench"></i></div>
+                <h3>Plumbing</h3>
+                <p>Professional plumbing and pipe installation</p>
+            </div>
+            <div class="service-card">
+                <div class="icon"><i class="fas fa-bolt"></i></div>
+                <h3>Electrical</h3>
+                <p>Safe and reliable electrical services</p>
+            </div>
+            <div class="service-card">
+                <div class="icon"><i class="fas fa-cogs"></i></div>
+                <h3>Mechanical</h3>
+                <p>Precision mechanical repairs and maintenance</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize everything when the page loads
+        window.addEventListener('load', async () => {
+            try {
+                // Ensure Three.js is loaded
+                if (typeof THREE === 'undefined') {
+                    console.error('Three.js not loaded');
+                    // Try loading from alternative CDN
+                    const script = document.createElement('script');
+                    script.src = 'https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js';
+                    await new Promise((resolve, reject) => {
+                        script.onload = resolve;
+                        script.onerror = reject;
+                        document.head.appendChild(script);
+                    });
+                    
+                    // Load WebGL.js after Three.js
+                    const webglScript = document.createElement('script');
+                    webglScript.src = 'https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/WebGL.js';
+                    await new Promise((resolve, reject) => {
+                        webglScript.onload = resolve;
+                        webglScript.onerror = reject;
+                        document.head.appendChild(webglScript);
+                    });
+                }
+
+                // Initialize the scene
+                if (typeof init === 'function') {
+                    init();
+                } else {
+                    console.error('init function not found');
+                }
+            } catch (error) {
+                console.error('Error during initialization:', error);
+            }
+        });
+    </script>
+
+    <script>
+        // Language switcher event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set initial active state based on stored language
+            const storedLang = localStorage.getItem('selectedLanguage') || 'en';
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === storedLang);
+            });
+
+            // Add click handlers
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const lang = btn.dataset.lang;
+                    switchLanguage(lang);
+                });
+            });
+        });
+    </script>
+
+    <script>
+        class Sidebar {
+            constructor() {
+                this.menuBtn = document.querySelector('.menu-btn');
+                this.sidebar = document.querySelector('.sidebar');
+                this.sidebarBg = document.querySelector('.sidebar__bg');
+                this.closeBtn = document.querySelector('.sidebar__close');
+                this.isOpen = false;
+                
+                this.init();
+            }
+
+            init() {
+                // Initialize Three.js scene
+                this.initThreeJS();
+                
+                // Add event listeners
+                this.menuBtn.addEventListener('click', () => this.toggleSidebar());
+                this.closeBtn.addEventListener('click', () => this.closeSidebar());
+                
+                // Close sidebar when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (this.isOpen && !this.sidebar.contains(e.target) && !this.menuBtn.contains(e.target)) {
+                        this.closeSidebar();
+                    }
+                });
+
+                // Close sidebar when pressing Escape key
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.isOpen) {
+                        this.closeSidebar();
+                    }
+                });
+
+                // Close sidebar when clicking a link
+                document.querySelectorAll('.sidebar__nav-link').forEach(link => {
+                    link.addEventListener('click', () => this.closeSidebar());
+                });
+
+                // Update sidebar content on initial load
+                this.updateSidebarContent();
+
+                // Listen for language changes
+                document.addEventListener('languageChanged', () => {
+                    this.updateSidebarContent();
+                });
+            }
+
+            updateSidebarContent() {
+                const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+                const navLinks = this.sidebar.querySelectorAll('.sidebar__nav-link');
+                const services = ['services', 'howItWorks', 'courses', 'about'];
+                const icons = ['fa-tools', 'fa-info-circle', 'fa-graduation-cap', 'fa-users'];
+                
+                navLinks.forEach((link, index) => {
+                    const key = services[index];
+                    if (translations && translations[currentLang] && translations[currentLang].nav[key]) {
+                        link.innerHTML = `<i class="fas ${icons[index]}"></i> ${translations[currentLang].nav[key]}`;
+                    }
+                });
+
+                // Update app buttons in sidebar
+                const appButtons = this.sidebar.querySelectorAll('.app-btn');
+                appButtons.forEach(btn => {
+                    const isAndroid = btn.classList.contains('android-btn');
+                    const key = isAndroid ? 'android' : 'ios';
+                    if (translations && translations[currentLang] && translations[currentLang].app[key]) {
+                        btn.innerHTML = `<i class="fab fa-${isAndroid ? 'android' : 'apple'}"></i> ${translations[currentLang].app[key]}`;
+                    }
+                });
+            }
+
+            initThreeJS() {
+                // Create scene
+                const scene = new THREE.Scene();
+                
+                // Create camera
+                const camera = new THREE.PerspectiveCamera(75, this.sidebarBg.clientWidth / this.sidebarBg.clientHeight, 0.1, 1000);
+                camera.position.z = 5;
+                
+                // Create renderer
+                const renderer = new THREE.WebGLRenderer({ 
+                    alpha: true, 
+                    antialias: true,
+                    powerPreference: "high-performance"
+                });
+                renderer.setSize(this.sidebarBg.clientWidth, this.sidebarBg.clientHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                this.sidebarBg.appendChild(renderer.domElement);
+                
+                // Create particles
+                const particlesGeometry = new THREE.BufferGeometry();
+                const particlesCount = 2000;
+                
+                const posArray = new Float32Array(particlesCount * 3);
+                const colorArray = new Float32Array(particlesCount * 3);
+                
+                for(let i = 0; i < particlesCount * 3; i++) {
+                    // Position
+                    posArray[i] = (Math.random() - 0.5) * 10;
+                    
+                    // Color
+                    const color = new THREE.Color();
+                    color.setHSL(Math.random() * 0.1 + 0.5, 0.8, 0.5);
+                    colorArray[i] = color.r;
+                    colorArray[i + 1] = color.g;
+                    colorArray[i + 2] = color.b;
+                }
+                
+                particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+                particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
+                
+                // Create material
+                const particlesMaterial = new THREE.PointsMaterial({
+                    size: 0.02,
+                    vertexColors: true,
+                    transparent: true,
+                    opacity: 0.8,
+                    blending: THREE.AdditiveBlending,
+                    sizeAttenuation: true
+                });
+                
+                // Create mesh
+                const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+                scene.add(particlesMesh);
+                
+                // Mouse movement effect
+                let mouseX = 0;
+                let mouseY = 0;
+                
+                document.addEventListener('mousemove', (event) => {
+                    if (this.isOpen) {
+                        mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                        mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+                    }
+                });
+                
+                // Animation
+                const animate = () => {
+                    requestAnimationFrame(animate);
+                    
+                    if (this.isOpen) {
+                        particlesMesh.rotation.x += 0.0005;
+                        particlesMesh.rotation.y += 0.0005;
+                        
+                        // Add mouse movement effect
+                        particlesMesh.rotation.x += mouseY * 0.0005;
+                        particlesMesh.rotation.y += mouseX * 0.0005;
+                    }
+                    
+                    renderer.render(scene, camera);
+                };
+                
+                animate();
+                
+                // Handle window resize
+                window.addEventListener('resize', () => {
+                    camera.aspect = this.sidebarBg.clientWidth / this.sidebarBg.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(this.sidebarBg.clientWidth, this.sidebarBg.clientHeight);
+                    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                });
+            }
+
+            toggleSidebar() {
+                if (this.isOpen) {
+                    this.closeSidebar();
+                } else {
+                    this.openSidebar();
+                }
+            }
+
+            openSidebar() {
+                this.sidebar.classList.add('active');
+                this.menuBtn.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                this.isOpen = true;
+            }
+
+            closeSidebar() {
+                this.sidebar.classList.remove('active');
+                this.menuBtn.classList.remove('active');
+                document.body.style.overflow = '';
+                this.isOpen = false;
+            }
+        }
+
+        // Initialize sidebar when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new Sidebar();
+        });
+    </script>
+
+    <script>
+        async function loadTranslations() {
+            try {
+                const response = await fetch('/js/translations.json');
+                const loadedTranslations = await response.json();
+                window.translations = loadedTranslations;
+                return loadedTranslations;
+            } catch (error) {
+                console.error('Error loading translations:', error);
+                return null;
+            }
+        }
+
+        function updateDirection(lang) {
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = lang;
+        }
+
+        function updateLogo() {
+            const logos = document.querySelectorAll('.logo, .sidebar__logo');
+            logos.forEach(logo => {
+                logo.innerHTML = 'Service<span>Kit</span>';
+            });
+        }
+
+        function updateNavigation(lang) {
+            // Update main navigation
+            const mainNavLinks = document.querySelectorAll('.main-nav .nav-link');
+            const services = ['services', 'howItWorks', 'courses', 'about'];
+            
+            mainNavLinks.forEach((link, index) => {
+                const key = services[index];
+                if (translations && translations[lang] && translations[lang].nav[key]) {
+                    link.textContent = translations[lang].nav[key];
+                }
+            });
+
+            // Update sidebar navigation
+            const sidebarNavLinks = document.querySelectorAll('.sidebar__nav-link');
+            const icons = ['fa-tools', 'fa-info-circle', 'fa-graduation-cap', 'fa-users'];
+            
+            sidebarNavLinks.forEach((link, index) => {
+                const key = services[index];
+                if (translations && translations[lang] && translations[lang].nav[key]) {
+                    link.innerHTML = `<i class="fas ${icons[index]}"></i> ${translations[lang].nav[key]}`;
+                }
+            });
+        }
+
+        function updateHero(lang) {
+            const title = document.querySelector('.title');
+            const subtitle = document.querySelector('.subtitle');
+            
+            if (title) title.textContent = translations[lang].hero.title;
+            if (subtitle) subtitle.textContent = translations[lang].hero.subtitle;
+        }
+
+        function updateServiceCards(lang) {
+            const services = ['carpentry', 'plumbing', 'electrical', 'mechanical'];
+            const cards = document.querySelectorAll('.service-card');
+            
+            cards.forEach((card, index) => {
+                const service = services[index];
+                const title = card.querySelector('h3');
+                const description = card.querySelector('p');
+                
+                if (title) title.textContent = translations[lang].services[service].title;
+                if (description) description.textContent = translations[lang].services[service].description;
+            });
+
+            // Update service items in services page
+            const serviceItems = document.querySelectorAll('.service-item');
+            serviceItems.forEach((item, index) => {
+                const service = services[index];
+                const title = item.querySelector('.service-title');
+                const description = item.querySelector('.service-description');
+                
+                if (title) title.textContent = translations[lang].services[service].title;
+                if (description) description.textContent = translations[lang].services[service].description;
+            });
+
+            // Update course cards in courses page
+            const courseCards = document.querySelectorAll('.course-card');
+            courseCards.forEach((card, index) => {
+                const service = services[index];
+                const title = card.querySelector('.course-title');
+                
+                if (title) title.textContent = translations[lang].services[service].title;
+            });
+        }
+
+        function updateAppButtons(lang) {
+            const appButtons = document.querySelectorAll('.app-btn');
+            
+            appButtons.forEach(btn => {
+                const isAndroid = btn.classList.contains('android-btn');
+                const key = isAndroid ? 'android' : 'ios';
+                btn.innerHTML = `<i class="fab fa-${isAndroid ? 'android' : 'apple'}"></i> ${translations[lang].app[key]}`;
+            });
+        }
+
+        function updateHowItWorks(lang) {
+            const title = document.querySelector('.how-it-works-hero .title');
+            const subtitle = document.querySelector('.how-it-works-hero .subtitle');
+            
+            if (title) title.textContent = translations[lang].howItWorks.title;
+            if (subtitle) subtitle.textContent = translations[lang].howItWorks.subtitle;
+
+            // Update steps
+            const steps = document.querySelectorAll('.step');
+            const stepKeys = ['requestService', 'chooseTechnician', 'getJobDone', 'rateReview'];
+            
+            steps.forEach((step, index) => {
+                const key = stepKeys[index];
+                const stepTitle = step.querySelector('.step-title');
+                const stepDescription = step.querySelector('.step-description');
+                
+                if (stepTitle) stepTitle.textContent = translations[lang].howItWorks.steps[key].title;
+                if (stepDescription) stepDescription.textContent = translations[lang].howItWorks.steps[key].description;
+            });
+        }
+
+        function updateAbout(lang) {
+            const title = document.querySelector('.about-hero .title');
+            const subtitle = document.querySelector('.about-hero .subtitle');
+            
+            if (title) title.textContent = translations[lang].about.title;
+            if (subtitle) subtitle.textContent = translations[lang].about.subtitle;
+
+            // Update Mission & Vision
+            const missionTitle = document.querySelector('.mission-card h3');
+            const missionDesc = document.querySelector('.mission-card p');
+            const visionTitle = document.querySelector('.vision-card h3');
+            const visionDesc = document.querySelector('.vision-card p');
+
+            if (missionTitle) missionTitle.textContent = translations[lang].about.mission.title;
+            if (missionDesc) missionDesc.textContent = translations[lang].about.mission.description;
+            if (visionTitle) visionTitle.textContent = translations[lang].about.vision.title;
+            if (visionDesc) visionDesc.textContent = translations[lang].about.vision.description;
+
+            // Update Team Section
+            const teamTitle = document.querySelector('.section-title');
+            if (teamTitle) teamTitle.textContent = translations[lang].about.team.title;
+
+            // Update Team Members
+            const teamMembers = document.querySelectorAll('.team-member');
+            const memberKeys = ['ceo', 'cto', 'operations'];
+            
+            teamMembers.forEach((member, index) => {
+                const key = memberKeys[index];
+                const memberName = member.querySelector('.member-name');
+                const memberRole = member.querySelector('.member-role');
+                const memberBio = member.querySelector('.member-bio');
+                
+                if (memberName) memberName.textContent = translations[lang].about.team.members[key].name;
+                if (memberRole) memberRole.textContent = translations[lang].about.team.members[key].role;
+                if (memberBio) memberBio.textContent = translations[lang].about.team.members[key].bio;
+            });
+        }
+
+        function updateServices(lang) {
+            // Update title and subtitle
+            const title = document.querySelector('.services-hero .title');
+            const subtitle = document.querySelector('.services-hero .subtitle');
+            if (title) title.textContent = translations[lang].services.title;
+            if (subtitle) subtitle.textContent = translations[lang].services.subtitle;
+
+            // Update service items
+            const serviceItems = document.querySelectorAll('.service-item');
+            const serviceTypes = ['carpentry', 'plumbing', 'electrical', 'mechanical'];
+            
+            serviceItems.forEach((item, index) => {
+                const type = serviceTypes[index];
+                const serviceData = translations[lang].services[type];
+                
+                // Update title and description
+                const title = item.querySelector('.service-title');
+                const description = item.querySelector('.service-description');
+                if (title) title.textContent = serviceData.title;
+                if (description) description.textContent = serviceData.description;
+
+                // Update features
+                const features = item.querySelectorAll('.service-features li');
+                features.forEach((feature, fIndex) => {
+                    feature.textContent = serviceData.features[fIndex];
+                });
+            });
+        }
+
+        function updateCourses(lang) {
+            // Update title and subtitle
+            const title = document.querySelector('.courses-hero .title');
+            const subtitle = document.querySelector('.courses-hero .subtitle');
+            if (title) title.textContent = translations[lang].courses.title;
+            if (subtitle) subtitle.textContent = translations[lang].courses.subtitle;
+
+            // Update course cards
+            const courseCards = document.querySelectorAll('.course-card');
+            const courseTypes = ['carpentry', 'plumbing', 'electrical', 'mechanical'];
+            const levels = ['beginner', 'intermediate', 'advanced', 'expert'];
+            
+            courseCards.forEach((card, index) => {
+                const type = courseTypes[index];
+                const courseData = translations[lang].courses.items[type];
+                
+                // Update level
+                const level = card.querySelector('.course-level');
+                if (level) level.textContent = translations[lang].courses.levels[levels[index]];
+
+                // Update title and description
+                const title = card.querySelector('.course-title');
+                const description = card.querySelector('.course-description');
+                if (title) title.textContent = courseData.title;
+                if (description) description.textContent = courseData.description;
+
+                // Update course details
+                const details = card.querySelectorAll('.course-detail span');
+                if (details[0]) details[0].textContent = details[0].textContent.replace(/\d+/, '') + translations[lang].courses.details.weeks;
+                if (details[1]) details[1].textContent = details[1].textContent.replace(/\d+/, '') + translations[lang].courses.details.students;
+
+                // Update enroll button
+                const enrollBtn = card.querySelector('.course-cta');
+                if (enrollBtn) enrollBtn.textContent = translations[lang].courses.enroll;
+            });
+
+            // Update modal content if it exists
+            const modal = document.getElementById('downloadModal');
+            if (modal) {
+                const modalTitle = modal.querySelector('.modal-header h2');
+                const modalSubtitle = modal.querySelector('.modal-header p');
+                const androidBtn = modal.querySelector('.android-btn .btn-text');
+                const iosBtn = modal.querySelector('.ios-btn .btn-text');
+
+                if (modalTitle) modalTitle.textContent = translations[lang].courses.modal.title;
+                if (modalSubtitle) modalSubtitle.textContent = translations[lang].courses.modal.subtitle;
+                
+                if (androidBtn) {
+                    androidBtn.querySelector('.small-text').textContent = translations[lang].courses.modal.android.small;
+                    androidBtn.querySelector('.large-text').textContent = translations[lang].courses.modal.android.large;
+                }
+                
+                if (iosBtn) {
+                    iosBtn.querySelector('.small-text').textContent = translations[lang].courses.modal.ios.small;
+                    iosBtn.querySelector('.large-text').textContent = translations[lang].courses.modal.ios.large;
+                }
+            }
+        }
+
+        async function switchLanguage(lang) {
+            await loadTranslations();
+            window.currentLang = lang;
+            localStorage.setItem('selectedLanguage', lang);
+            
+            updateDirection(lang);
+            updateLogo();
+            updateNavigation(lang);
+            updateHero(lang);
+            updateServiceCards(lang);
+            updateAppButtons(lang);
+            updateHowItWorks(lang);
+            updateAbout(lang);
+            updateServices(lang);
+            updateCourses(lang);
+            
+            // Update active state of language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Dispatch language changed event
+            document.dispatchEvent(new Event('languageChanged'));
+        }
+
+        // Initialize translations and set initial language
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadTranslations();
+            const initialLang = localStorage.getItem('selectedLanguage') || 'en';
+            switchLanguage(initialLang);
+        });
+    </script>
+</body>
+</html> 

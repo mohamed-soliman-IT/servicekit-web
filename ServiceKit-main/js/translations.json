@@ -1,0 +1,316 @@
+{
+    "en": {
+        "nav": {
+            "services": "Services",
+            "howItWorks": "How It Works",
+            "courses": "Courses",
+            "about": "About"
+        },
+        "hero": {
+            "title": "Connect with Professional Technicians",
+            "subtitle": "Find skilled professionals for all your service needs",
+            "findProfessional": "Find a Professional",
+            "becomeTechnician": "Become a Technician"
+        },
+        "services": {
+            "title": "Our Services",
+            "subtitle": "Professional services for all your needs",
+            "carpentry": {
+                "title": "Carpentry",
+                "description": "Expert woodworking and furniture making services",
+                "features": [
+                    "Custom furniture design",
+                    "Wood repairs and restoration",
+                    "Installation services"
+                ]
+            },
+            "plumbing": {
+                "title": "Plumbing",
+                "description": "Professional plumbing and pipe installation",
+                "features": [
+                    "Pipe installation and repair",
+                    "Drain cleaning",
+                    "Water heater services"
+                ]
+            },
+            "electrical": {
+                "title": "Electrical",
+                "description": "Safe and reliable electrical services",
+                "features": [
+                    "Electrical repairs",
+                    "Installation services",
+                    "Safety inspections"
+                ]
+            },
+            "mechanical": {
+                "title": "Mechanical",
+                "description": "Precision mechanical repairs and maintenance",
+                "features": [
+                    "Equipment maintenance",
+                    "Repair services",
+                    "Installation support"
+                ]
+            }
+        },
+        "app": {
+            "android": "Android",
+            "ios": "iOS"
+        },
+        "howItWorks": {
+            "title": "How It Works",
+            "subtitle": "Simple steps to get your service done",
+            "steps": {
+                "requestService": {
+                    "title": "Request Service",
+                    "description": "Submit your service request through our platform"
+                },
+                "chooseTechnician": {
+                    "title": "Choose Technician",
+                    "description": "Select from our verified professional technicians"
+                },
+                "getJobDone": {
+                    "title": "Get Job Done",
+                    "description": "Our technician will complete your service professionally"
+                },
+                "rateReview": {
+                    "title": "Rate & Review",
+                    "description": "Share your experience and help others"
+                }
+            }
+        },
+        "about": {
+            "title": "About Us",
+            "subtitle": "Your trusted service partner",
+            "mission": {
+                "title": "Our Mission",
+                "description": "To connect skilled professionals with those who need their services"
+            },
+            "vision": {
+                "title": "Our Vision",
+                "description": "To be the leading platform for professional services"
+            },
+            "team": {
+                "title": "Our Team",
+                "members": {
+                    "ceo": {
+                        "name": "John Doe",
+                        "role": "CEO",
+                        "bio": "Experienced leader with a passion for service excellence"
+                    },
+                    "cto": {
+                        "name": "Jane Smith",
+                        "role": "CTO",
+                        "bio": "Tech innovator driving digital transformation"
+                    },
+                    "operations": {
+                        "name": "Mike Johnson",
+                        "role": "Operations Director",
+                        "bio": "Operations expert ensuring smooth service delivery"
+                    }
+                }
+            }
+        },
+        "courses": {
+            "title": "Professional Courses",
+            "subtitle": "Learn from industry experts",
+            "levels": {
+                "beginner": "Beginner",
+                "intermediate": "Intermediate",
+                "advanced": "Advanced",
+                "expert": "Expert"
+            },
+            "details": {
+                "weeks": " weeks",
+                "students": " students"
+            },
+            "enroll": "Enroll Now",
+            "modal": {
+                "title": "Download Our App",
+                "subtitle": "Get access to all courses on the go",
+                "android": {
+                    "small": "GET IT ON",
+                    "large": "Google Play"
+                },
+                "ios": {
+                    "small": "Download on the",
+                    "large": "App Store"
+                }
+            },
+            "items": {
+                "carpentry": {
+                    "title": "Carpentry Fundamentals",
+                    "description": "Learn essential woodworking skills"
+                },
+                "plumbing": {
+                    "title": "Plumbing Basics",
+                    "description": "Master plumbing installation and repair"
+                },
+                "electrical": {
+                    "title": "Electrical Systems",
+                    "description": "Understand electrical systems and safety"
+                },
+                "mechanical": {
+                    "title": "Mechanical Engineering",
+                    "description": "Advanced mechanical systems and maintenance"
+                }
+            }
+        }
+    },
+    "ar": {
+        "nav": {
+            "services": "الخدمات",
+            "howItWorks": "كيف يعمل",
+            "courses": "الدورات",
+            "about": "من نحن"
+        },
+        "hero": {
+            "title": "تواصل مع الفنيين المحترفين",
+            "subtitle": "ابحث عن محترفين مهرة لجميع احتياجاتك",
+            "findProfessional": "ابحث عن محترف",
+            "becomeTechnician": "كن فنيًا"
+        },
+        "services": {
+            "title": "خدماتنا",
+            "subtitle": "خدمات احترافية لجميع احتياجاتك",
+            "carpentry": {
+                "title": "النجارة",
+                "description": "خدمات النجارة وصناعة الأثاث الاحترافية",
+                "features": [
+                    "تصميم أثاث مخصص",
+                    "إصلاح وترميم الخشب",
+                    "خدمات التركيب"
+                ]
+            },
+            "plumbing": {
+                "title": "السباكة",
+                "description": "خدمات السباكة وتركيب الأنابيب الاحترافية",
+                "features": [
+                    "تركيب وإصلاح الأنابيب",
+                    "تنظيف المصارف",
+                    "خدمات سخانات المياه"
+                ]
+            },
+            "electrical": {
+                "title": "الكهرباء",
+                "description": "خدمات كهربائية آمنة وموثوقة",
+                "features": [
+                    "إصلاحات كهربائية",
+                    "خدمات التركيب",
+                    "فحوصات السلامة"
+                ]
+            },
+            "mechanical": {
+                "title": "ميكانيكي",
+                "description": "خدمات إصلاح وصيانة ميكانيكية دقيقة",
+                "features": [
+                    "صيانة المعدات",
+                    "خدمات الإصلاح",
+                    "دعم التركيب"
+                ]
+            }
+        },
+        "app": {
+            "android": "أندرويد",
+            "ios": "آي أو إس"
+        },
+        "howItWorks": {
+            "title": "كيف يعمل",
+            "subtitle": "خطوات بسيطة لإنجاز خدمتك",
+            "steps": {
+                "requestService": {
+                    "title": "طلب الخدمة",
+                    "description": "قدم طلب خدمتك من خلال منصتنا"
+                },
+                "chooseTechnician": {
+                    "title": "اختر الفني",
+                    "description": "اختر من بين فنيينا المحترفين المعتمدين"
+                },
+                "getJobDone": {
+                    "title": "إنجاز العمل",
+                    "description": "سيقوم فنيونا بإنجاز خدمتك بشكل احترافي"
+                },
+                "rateReview": {
+                    "title": "التقييم والمراجعة",
+                    "description": "شارك تجربتك وساعد الآخرين"
+                }
+            }
+        },
+        "about": {
+            "title": "من نحن",
+            "subtitle": "شريك خدمتك الموثوق",
+            "mission": {
+                "title": "مهمتنا",
+                "description": "ربط المحترفين المهرة بمن يحتاجون إلى خدماتهم"
+            },
+            "vision": {
+                "title": "رؤيتنا",
+                "description": "أن نكون المنصة الرائدة للخدمات الاحترافية"
+            },
+            "team": {
+                "title": "فريقنا",
+                "members": {
+                    "ceo": {
+                        "name": "جون دو",
+                        "role": "الرئيس التنفيذي",
+                        "bio": "قائد ذو خبرة مع شغف بالتميز في الخدمة"
+                    },
+                    "cto": {
+                        "name": "جين سميث",
+                        "role": "الرئيس التقني",
+                        "bio": "مبتكر تقني يقود التحول الرقمي"
+                    },
+                    "operations": {
+                        "name": "مايك جونسون",
+                        "role": "مدير العمليات",
+                        "bio": "خبير عمليات يضمن تقديم الخدمة بسلاسة"
+                    }
+                }
+            }
+        },
+        "courses": {
+            "title": "الدورات الاحترافية",
+            "subtitle": "تعلم من خبراء الصناعة",
+            "levels": {
+                "beginner": "مبتدئ",
+                "intermediate": "متوسط",
+                "advanced": "متقدم",
+                "expert": "خبير"
+            },
+            "details": {
+                "weeks": " أسابيع",
+                "students": " طالب"
+            },
+            "enroll": "سجل الآن",
+            "modal": {
+                "title": "حمل تطبيقنا",
+                "subtitle": "احصل على الوصول إلى جميع الدورات أثناء التنقل",
+                "android": {
+                    "small": "احصل عليه من",
+                    "large": "جوجل بلاي"
+                },
+                "ios": {
+                    "small": "حمل من",
+                    "large": "آب ستور"
+                }
+            },
+            "items": {
+                "carpentry": {
+                    "title": "أساسيات النجارة",
+                    "description": "تعلم مهارات النجارة الأساسية"
+                },
+                "plumbing": {
+                    "title": "أساسيات السباكة",
+                    "description": "إتقان تركيب وإصلاح السباكة"
+                },
+                "electrical": {
+                    "title": "الأنظمة الكهربائية",
+                    "description": "فهم الأنظمة الكهربائية والسلامة"
+                },
+                "mechanical": {
+                    "title": "الهندسة الميكانيكية",
+                    "description": "الأنظمة الميكانيكية المتقدمة والصيانة"
+                }
+            }
+        }
+    }
+} 

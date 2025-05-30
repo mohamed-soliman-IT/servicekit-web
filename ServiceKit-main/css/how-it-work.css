@@ -1,0 +1,145 @@
+.how-it-works-hero {
+    padding: 120px 5% 60px;
+    background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(0,0,0,0.7));
+    min-height: 100vh;
+}
+
+.steps-container {
+    max-width: 1200px;
+    margin: 50px auto;
+    position: relative;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.step:last-child {
+    margin-bottom: 0;
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #00ffff, #0088ff);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    margin-right: 30px;
+    flex-shrink: 0;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+}
+
+[dir="rtl"] .step-number {
+    margin-right: 0;
+    margin-left: 30px;
+}
+
+.step-content {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 30px;
+    flex-grow: 1;
+    border: 1px solid rgba(0, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    text-align: left;
+}
+
+[dir="rtl"] .step-content {
+    text-align: right;
+}
+
+.step-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.step-description {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+}
+
+.step-icon {
+    font-size: 40px;
+    color: #00ffff;
+    margin-left: 30px;
+    flex-shrink: 0;
+}
+
+[dir="rtl"] .step-icon {
+    margin-left: 0;
+    margin-right: 30px;
+}
+
+.connecting-line {
+    position: absolute;
+    left: 30px;
+    top: 60px;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #00ffff, transparent);
+}
+
+[dir="rtl"] .connecting-line {
+    left: auto;
+    right: 30px;
+}
+
+.step:last-child .connecting-line {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .how-it-works-hero {
+        padding: 100px 5% 40px;
+    }
+
+    .step {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .step-number {
+        margin: 0 0 20px 0;
+    }
+
+    [dir="rtl"] .step-number {
+        margin: 0 0 20px 0;
+    }
+
+    .step-icon {
+        margin: 20px 0 0 0;
+    }
+
+    [dir="rtl"] .step-icon {
+        margin: 20px 0 0 0;
+    }
+
+    .connecting-line {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    [dir="rtl"] .connecting-line {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+    }
+
+    .step-content {
+        text-align: center;
+    }
+
+    [dir="rtl"] .step-content {
+        text-align: center;
+    }
+}

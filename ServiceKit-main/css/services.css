@@ -1,0 +1,100 @@
+
+.services-hero {
+    padding: 120px 5% 60px;
+    background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(0,0,0,0.7));
+    min-height: 100vh;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.service-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 30px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.service-item:hover {
+    transform: translateY(-10px);
+    border-color: rgba(0, 255, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+}
+
+.service-icon {
+    font-size: 40px;
+    color: #00ffff;
+    margin-bottom: 20px;
+}
+
+.service-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.service-description {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.service-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.service-features li {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.service-features li i {
+    color: #00ffff;
+    font-size: 14px;
+}
+
+.service-cta {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #00ffff, #0088ff);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.service-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(0, 255, 255, 0.4);
+}
+
+@media (max-width: 768px) {
+    .services-hero {
+        padding: 100px 5% 40px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-item {
+        padding: 20px;
+    }
+}
